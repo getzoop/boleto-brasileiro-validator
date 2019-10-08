@@ -1,5 +1,5 @@
 {
-  "name": "boleto-brasileiro-validator",
+  "name": "zoop-boleto-brasileiro-validador",
   "version": "1.0.3",
   "description": "Validador de boletos bancários",
   "main": "dist/boleto-brasileiro-validator.js",
