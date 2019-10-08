@@ -12,7 +12,6 @@ export function boletoBancarioCodigoBarras(codigo) {
 
 export function boletoBancarioLinhaDigitavel(codigo, validarBlocos = false) {
   const cod = clearMask(codigo);
-  if (!/^[0-9]{47}$/.test(cod)) return false;
   const blocos = [
     {
       num: cod.substring(0, 9),
@@ -52,6 +51,7 @@ export function boletoBancarioLinhaDigitavel(codigo, validarBlocos = false) {
        && boletoBancarioCodigoBarras(convertToBoletoBancarioCodigoBarras(cod));
     }
   } else {
+    if (!/^[0-9]{47}$/.test(cod)) return false;
     validBlocos = boletoBancarioCodigoBarras(convertToBoletoBancarioCodigoBarras(cod));
   }
 
