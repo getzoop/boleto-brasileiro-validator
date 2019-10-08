@@ -28,22 +28,22 @@ export function boletoBancarioLinhaDigitavel(codigo, validarBlocos = false) {
   ];
   let validBlocos;
   if (validarBlocos) {
-    if (cod.length === 10) {
+    if (cod.length >= 10) {
       const num = cod.substring(0, 9);
       const DV = cod.substring(9, 10);
       validBlocos = modulo10(num) === Number(DV);
     }
 
-    if (cod.length === 20) {
+    if (cod.length >= 20) {
       const num = cod.substring(10, 20);
       const DV = cod.substring(20, 21);
-      validBlocos = modulo10(num) === Number(DV);
+      validBlocos = validBlocos && modulo10(num) === Number(DV);
     }
 
-    if (cod.length === 30) {
+    if (cod.length >= 30) {
       const num = cod.substring(21, 31);
       const DV = cod.substring(31, 32);
-      validBlocos = modulo10(num) === Number(DV);
+      validBlocos = validBlocos && modulo10(num) === Number(DV);
     }
 
     if (cod.length === 47) {
