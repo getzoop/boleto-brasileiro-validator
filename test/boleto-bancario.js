@@ -48,7 +48,7 @@ describe('Validar Boletos Bancários', () => {
   });
 
   it('validação do boleto com blocos válidos', () => {
-    const result = boletoBancario('34191790010104351004791020150008683600026000', true);
+    const result = boletoBancario('237933812860037196882760000633053836100000100000', true);
     assert.equal(result, true);
   });
 
@@ -57,14 +57,14 @@ describe('Validar Boletos Bancários', () => {
     assert.equal(result, false);
   });
 
-  it('validar código de barras bloco 1', () => {
-    const codigoDeBarras = '34191790010104351004791020150008683600026000';
-    let codigoAValidar;
+  it('validar linha digitavel por bloco', () => {
+    const codigoDeBarras = '237933812860037196882760000633053836100000100000';
+    let codigoAValidar = '';
 
     for (let i = 0; i < codigoDeBarras.length; i++) {
-      codigoAValidar += codigoDeBarras.charAt(i);
+      codigoAValidar += codigoDeBarras[i];
       const result = boletoBancario(codigoAValidar, true);
-      assert.equal(result, true);
+      assert.equal(result, true, `Código inválido ${codigoAValidar}`);
     }
   });
 });

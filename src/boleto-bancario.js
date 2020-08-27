@@ -26,27 +26,31 @@ export function boletoBancarioLinhaDigitavel(codigo, validarBlocos = false) {
       DV: cod.substring(31, 32),
     },
   ];
-  let validBlocos;
+  let validBlocos = true;
   if (validarBlocos) {
-    if (cod.length >= 10) {
+    const isFirstBlock = cod.length >= 10;
+    const isSecondBlock = cod.length >= 21;
+    const isThirdBlock = cod.length >= 32;
+    const isFourthBlock = cod.length >= 50;
+    if (isFirstBlock) {
       const num = cod.substring(0, 9);
       const DV = cod.substring(9, 10);
       validBlocos = modulo10(num) === Number(DV);
     }
 
-    if (cod.length >= 20) {
+    if (isSecondBlock) {
       const num = cod.substring(10, 20);
       const DV = cod.substring(20, 21);
       validBlocos = validBlocos && modulo10(num) === Number(DV);
     }
 
-    if (cod.length >= 30) {
+    if (isThirdBlock) {
       const num = cod.substring(21, 31);
       const DV = cod.substring(31, 32);
       validBlocos = validBlocos && modulo10(num) === Number(DV);
     }
 
-    if (cod.length === 47) {
+    if (isFourthBlock) {
       validBlocos = blocos.every(e => modulo10(e.num) === Number(e.DV))
        && boletoBancarioCodigoBarras(convertToBoletoBancarioCodigoBarras(cod));
     }
@@ -54,12 +58,11 @@ export function boletoBancarioLinhaDigitavel(codigo, validarBlocos = false) {
     if (!/^[0-9]{47}$/.test(cod)) return false;
     validBlocos = boletoBancarioCodigoBarras(convertToBoletoBancarioCodigoBarras(cod));
   }
-
   return validBlocos;
 }
 
 export function boletoBancario(codigo, validarBlocos = false) {
   const cod = clearMask(codigo);
-  if (cod.length === 44) return boletoBancarioCodigoBarras(cod);
+  if (cod.length === 44 && !validarBlocos) return boletoBancarioCodigoBarras(cod);
   return boletoBancarioLinhaDigitavel(codigo, validarBlocos);
 }
