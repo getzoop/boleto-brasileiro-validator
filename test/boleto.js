@@ -8,7 +8,7 @@ describe('Validar Boletos', () => {
   });
 
   it('validar blocos da linha digitável do boleto', () => {
-    const result = boleto('23793.38128 60007.827136 95000.063305 9 75520000370000', true);
+    const result = boleto('23793.38128 60037.196882 76000.063305 3 836100000100000', true);
     assert.equal(result, true);
   });
 
